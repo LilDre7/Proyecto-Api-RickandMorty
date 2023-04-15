@@ -1,0 +1,48 @@
+input::placeholder {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+html {
+  height: 100vh;
+  height: 100vh;
+  background-position-x: -45vw;
+  background-position-y: top;
+  scroll-behavior: smooth;
+  background-image: url(/public/images/background2.jpg);
+}
+
+.App {
+  color: white;
+}
+
+.container__botton {
+  border: 1px solid forestgreen;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.input__header {
+  background-color: transparent;
+  background: transparent;
+}
+
+.button__header {
+  background-color: darkgreen;
+  padding: 1rem;
+}
+
+input {
+  border: none;
+  outline: none;
+}
+
+@media (min-width: 600px) {
+  .section__residentList {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

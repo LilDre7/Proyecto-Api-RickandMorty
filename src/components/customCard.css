@@ -1,0 +1,57 @@
+section {
+  cursor: url(/public/images/cursor.png) , auto;
+}
+
+/* Estilo imagen de rebote */
+div img {
+  display: block;
+  width: 100%; /* Ancho de la imagen ajustado al 100% del contenedor */
+  height: 100%; /* Altura de la imagen ajustada al 100% del contenedor */
+  object-fit: cover; /* Para ajustar la imagen en caso de que las proporciones sean diferentes */
+  transform: translateY(0); /* Ajuste inicial de la posición de la imagen */
+  animation: rebote 0.5s infinite alternate;
+}
+
+/* Animación de rebote */
+@keyframes rebote {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px); /* Altura de rebote ajustable */
+  }
+}
+
+
+
+
+/* Estilo del span */
+.info__card {
+  font-size: 1.3rem; /* Tamaño de fuente ajustable */
+  background-image: linear-gradient(95deg, #46fa05, #dec9c9 , #000);
+  background-size: 200% 200%; /* Tamaño del gradiente ajustable */
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  animation: cortocircuito 1s infinite;
+  text-shadow: #46fa05;
+}
+
+/* Estilo del h1 dentro del span */
+span {
+  display: inline;
+}
+
+/* Animación de cortocircuito */
+@keyframes cortocircuito {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
