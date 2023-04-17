@@ -5,11 +5,15 @@ section {
 /* Estilo imagen de rebote */
 div img {
   display: block;
-  width: 100%; /* Ancho de la imagen ajustado al 100% del contenedor */
-  height: 100%; /* Altura de la imagen ajustada al 100% del contenedor */
-  object-fit: cover; /* Para ajustar la imagen en caso de que las proporciones sean diferentes */
-  transform: translateY(0); /* Ajuste inicial de la posición de la imagen */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translateY(1);
   animation: rebote 0.5s infinite alternate;
+}
+
+div img:hover {
+  rotate: 380deg;
 }
 
 /* Animación de rebote */

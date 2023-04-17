@@ -4,9 +4,8 @@ import ResidentCard from "./ResidentCard";
 const ResidentList = ({ location }) => {
   const [currentPage, setcurrentPage] = useState(1);
   const residents = location?.residents;
-  console.log(residents);
 
-  const cantidad = 20;
+  const cantidad = 8;
 
   const arrayPages = [];
 
@@ -19,40 +18,71 @@ const ResidentList = ({ location }) => {
   const startCut = currentPage * cantidad - cantidad;
   const endtCut = currentPage * cantidad;
 
-
   useEffect(() => {
     setcurrentPage(1);
   }, [location]);
 
-  // slice(startCut, endtCut)
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setcurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < quantityPages) {
+      setcurrentPage(currentPage + 1);
+    }
+  };
 
   return (
-    <>
-      <section className="section__residentList">
-        {residents?.map((resident) => (
+    <section className="">
+      <section className="section__residentList ">
+        {residents?.slice(startCut, endtCut).map((resident) => (
           <h1 key={resident}>
             <ResidentCard key={resident} resident={resident} />
           </h1>
         ))}
       </section>
-      <ul className="flex gap-4 justify-center py-4 ">
-        {arrayPages.map((pages) => (
+      <ul className="lista__header_padre flex flex-wrap gap-4 justify-center py-4 max-w-[200px]: ">
+        {arrayPages.slice(0, 5).map((pages) => (
           <li
-            key={residents}
+            key={residents.pupolation}
             onClick={() => setcurrentPage(pages)}
-            className={`p-4 ${
-              pages === currentPage &&
-              "bg-white text-black rounded-t-full text-[1.4rem] "
+            className={`list__header  ${
+              pages === currentPage && "pages_custom"
             } `}
           >
             {pages}
           </li>
         ))}
       </ul>
-    </>
+      <div className="hidden sm_header sm:flex sm:justify-center sm:items-center">
+        <ul className="lista__header_padre flex flex-wrap gap-4 justify-center py-4">
+          {arrayPages.slice(0, -1).map((pages) => (
+            <li
+              key={residents}
+              onClick={() => setcurrentPage(pages)}
+              className={` ${
+                pages === currentPage &&
+                "pages_custom hover:bg-gray-200 border-red-200"
+              } `}
+            >
+              {pages}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <section className="pagination flex justify-center items-center pb-3 gap-5">
+        <button className="hover:text-green-600 flex justify-center items-center gap-3" onClick={handlePrevPage}>
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+          <span>Anterior</span>
+        </button>
+        <button className="hover:text-green-600 flex justify-center items-center gap-3" onClick={handleNextPage}>
+          <span>Siguiente</span>
+          <ion-icon className=""  name="arrow-forward-circle-outline"></ion-icon>
+        </button>
+      </section>
+    </section>
   );
 };
-
-// clase para la section principal -> grid auto-rows-auto grid-cols-[repeat(auto-fill,_minmax(220px,_1fr))] max-w-[1000px]
-
 export default ResidentList;

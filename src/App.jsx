@@ -1,16 +1,26 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import axios from "axios";
 import { getRandomDimesion } from "./helpers/random";
-import Location from "./components/Location";
 import ResidentList from "./components/ResidentList";
+import "./App.css";
 
 function App() {
   const [location, setLocation] = useState();
+  const [text, setText] = useState("");
+
+  const handleInput = ({ target }) => {
+    setText(target.value);
+  };
+
+    const persojaFiltrado = location?.residents?.filter(
+      (personaje) =>
+        personaje.location?.name
+          .toLowerCase()
+          .includes(text.toLocaleLowerCase())
+    );
 
   const handleSubmit = (e) => {
-    e.prevantDefault();
-
+    e.preventDefault();
     const newLocation = e.target.locationId.value;
 
     const URL = `https://rickandmortyapi.com/api/location/${newLocation}`;
@@ -41,25 +51,37 @@ function App() {
           <img className="w-40" src="./images/text.png" alt="" />
         </span>
       </div>
-      <form id="" onSubmit={handleSubmit}>
-        <div className="container__botton gap-3">
+      <form id="" onSubmit={handleSubmit} className="rounded-lg">
+        <div className="container__botton gap-3 rounded-md">
           <input
-            id="locationId"
+            id='locationId'
             placeholder="Type the location id..."
-            className="input__header bg-transparent"
-            // onFocus={handleSubmit}
+            className="input__header"
             type="text"
+            value={text}
+            onChange={handleInput}
           />
           <button className="button__header">
             <ion-icon name="search-outline"></ion-icon>
           </button>
         </div>
-        <h2 className="text-center gap-5 p-2 m-3 text-[1.4rem] text-green-500 ">
+      </form>
+
+      <section className="container__info text-center">
+        <h2 className="text-center gap-5 p-2 m-3 text-[1.6rem] text-green-500 ">
           Welcome to the crazy universe!
         </h2>
-      </form>
-      <ResidentList location={location} />
-      {/* <Location location={location} /> */}
+
+        <h2 className="">Name: {location?.name}</h2>
+        <ul className="flex justify-center flex-col py-2 gap-2 text-center">
+          <li>Type: {location?.type}</li>
+          <li>Dimension: {location?.dimension}</li>
+          <li>Population: {location?.residents.length}
+          </li>
+        </ul>
+      </section>
+
+      <ResidentList location={location} personaje={persojaFiltrado} />
     </div>
   );
 }
