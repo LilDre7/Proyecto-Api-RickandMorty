@@ -7,16 +7,35 @@ import Loader from "./components/Loader";
 
 function App() {
   const [location, setLocation] = useState();
-  const [text, setText] = useState("");
   const [isLoading, setLoading] = useState(false);
+  const [persons, setPersons] = useState([]);
+  const [text, setText] = useState("");
+  const [chanchitofeliz, setchanchitofeliz] = useState();
 
-  const handleInput = ({ target }) => {
-    setText(target.value);
+  // Parte del buscador de personajes
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setPersons(e.target.value);
+    const newLocation = e.target.value;
+
+    const URL = `https://rickandmortyapi.com/api/location/?name=${newLocation}`;
+
+    axios
+      .get(URL)
+      .then((res) => setchanchitofeliz(res.data))
+      .catch((err) => console.log(err));
   };
 
-  const persojaFiltrado = location?.residents?.filter((personaje) =>
-    personaje.location?.name.toLowerCase().includes(text.toLocaleLowerCase())
-  );
+  const showChanchitoFeliz = (url) => {
+    const URL = url;
+
+    axios
+      .get(URL)
+      .then((res) => setLocation(res.data))
+      .catch((err) => console.log(err));
+    setPersons("");
+  };
+  // Parte del buscador de personajes
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,21 +77,38 @@ function App() {
               <img className="w-40" src="./images/text.png" alt="" />
             </span>
           </div>
-          <form id="" onSubmit={handleSubmit} className="rounded-lg">
+
+          <form onSubmit={handleSubmit} className="rounded-lg">
             <div className="container__botton gap-3 rounded-md">
               <input
                 id="locationId"
                 placeholder="Type the location id..."
                 className="input__header"
                 type="text"
-                value={text}
-                onChange={handleInput}
+                value={persons}
+                onChange={handleSearch}
               />
-              <button className="button__header">
-                <ion-icon name="search-outline"></ion-icon>
-              </button>
+            <button className="button__header">
+              <ion-icon name="search-outline"></ion-icon>
+            </button>
             </div>
           </form>
+
+          {persons && (
+            <div className="relative p-2" > 
+            <ul className="lista__chanchitoFeliz bg-black/90" >
+              {chanchitofeliz?.results.map((endpoint) => (
+                <li
+                  key={endpoint?.id}
+                  onClick={() => showChanchitoFeliz(endpoint?.url)}
+                >
+                  {endpoint?.name}
+                </li>
+              ))}
+            </ul>
+            </div>
+          )}
+
           <section className="container__info text-center">
             <h2 className="text-center gap-5 p-2 m-3 text-[1.6rem] text-green-500 ">
               Welcome to the crazy universe!
@@ -86,7 +122,7 @@ function App() {
             </ul>
           </section>
 
-          <ResidentList location={location} personaje={persojaFiltrado} />
+          <ResidentList location={location} />
         </>
       )}
     </div>

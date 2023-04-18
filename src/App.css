@@ -134,5 +134,14 @@ input {
   font-family: 'Rubik Wet Paint', cursive;
 }
 
+.lista__chanchitoFeliz {
+  padding: 1rem;
+  border: 1px solid rgb(34, 255, 0);
+  border-radius: 10px;
+  position: absolute;
+  z-index: 4;
+  transform: translate(-51% , 0);
+  min-width: 300px;
+}
 
 
