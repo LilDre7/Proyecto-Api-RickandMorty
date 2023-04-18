@@ -1,0 +1,81 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+.loader {
+  animation: cambioDeColor 3s infinite;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  border: 4px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to left, #743ad5, #d53a9d);
+  animation: loader 2s infinite ease;
+  align-items: center;
+  height: 20vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: cambioDeColor 3s infinite;
+  padding: 1rem;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.loader-inner {
+  vertical-align: top;
+  display: inline-block;
+  width: 100%;
+  background: linear-gradient(to top, #00c853, #b2ff59);
+  animation: loader-inner 2s infinite ease-in;
+}
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(180deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader-inner {
+  0% {
+    height: 0%;
+  }
+  25% {
+    height: 0%;
+  }
+  50% {
+    height: 100%;
+  }
+  75% {
+    height: 100%;
+  }
+  100% {
+    height: 0%;
+  }
+}
+
+@keyframes cambioDeColor {
+  0% {
+    background-color: rgba(144, 0, 255, 0.5); 
+  }
+  50% {
+    background-color: rgba(187, 199, 187, 0.5);
+  }
+  100% {
+    background-color: rgba(221, 31, 31, 0.5);
+  }
+}
