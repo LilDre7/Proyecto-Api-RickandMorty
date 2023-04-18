@@ -95,12 +95,13 @@ function App() {
           </form>
 
           {persons && (
-            <div className="relative p-2" > 
+            <div className="relative p-2 cursor-pointer " > 
             <ul className="lista__chanchitoFeliz bg-black/90" >
               {chanchitofeliz?.results.map((endpoint) => (
                 <li
                   key={endpoint?.id}
                   onClick={() => showChanchitoFeliz(endpoint?.url)}
+                  className="text-white text-center hover:text-green-500"
                 >
                   {endpoint?.name}
                 </li>
